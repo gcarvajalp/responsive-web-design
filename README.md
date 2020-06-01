@@ -4,8 +4,11 @@
 <p>&nbsp;</p>
 
 <p>
-In this repository we can see examples of the course Responsible web design certificacion into <a href="https://www.freecodecamp.org/learn">freecodecamp</a></em>
+In this repository we can see code examples of the course Responsible web design certificacion into <a href="https://www.freecodecamp.org/learn">freecodecamp.org</a> to the certificacion
 </p>
+
+<!-- A spacer -->
+<p>&nbsp;</p>
 
 ## Table of contents
 
