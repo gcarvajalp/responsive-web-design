@@ -19,8 +19,28 @@ In this repository we can see code examples of the course Responsible web design
 
 ## Getting Started
 
+We will started starting docker container to create nginx static html server
+
 ## Running from command line
+
+Dockerfile command to build a image
+
+```sh
+docker build -t webserver-image:v1 .
+```
+
+Dockerfile command to deploy image
+
+```sh
+docker run -d -p 80:80 webserver-image:v1
+```
+
+Dockerfile command to delete image
 
 ## Documentation
 
 ## Licence
+
+```
+
+```

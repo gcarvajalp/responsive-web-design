@@ -3,7 +3,7 @@ version: "3"
 services:
   #Nginx services
   webserver:
-    image: nginx-alpine
+    image: nginx:alpine
     container_name: webserver
     restart: unless-stopped
     tty: true
@@ -12,6 +12,8 @@ services:
       - 443:443
     networks:
       - app-network
+    volumes:
+      - ./config/nginx:/etc/nginx/conf.d
 
 #Docker networks
 networks:
