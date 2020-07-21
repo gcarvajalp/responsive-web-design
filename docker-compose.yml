@@ -2,9 +2,9 @@ version: "3"
 
 services:
   #Nginx services
-  webserver:
+  servernginx:
     image: nginx:alpine
-    container_name: webserver
+    container_name: servernginx
     restart: unless-stopped
     tty: true
     ports:
