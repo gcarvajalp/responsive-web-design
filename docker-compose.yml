@@ -10,10 +10,13 @@ services:
     ports:
       - 80:80
       - 443:443
+    environment:
+      TZ: "America/Santiago"
     networks:
       - app-network
     volumes:
       - ./config/nginx:/etc/nginx/conf.d
+      - ./public_html:/public_html
 
 #Docker networks
 networks:
