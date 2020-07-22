@@ -5,7 +5,8 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=(services.sbis.cl)
+
+domains=(webcrapp.ddns.net)
 rsa_key_size=4096
 data_path="./config/data"
 email="g.carvajal.pizarro@gmail.com" # Adding a valid address is strongly recommended
