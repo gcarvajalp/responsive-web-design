@@ -38,6 +38,7 @@ docker-compose run --rm --entrypoint "\
 echo
 
 
+
 echo "### Starting nginx ..."
 docker-compose up --force-recreate -d servernginx
 echo
