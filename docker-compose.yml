@@ -20,7 +20,7 @@ services:
       - ./config/data:/etc/letsencrypt
       - ./config/logs:/var/lib/letsencrypt
 
-  certboxnginx:
+  certbot:
     image: certbot/certbot
     container_name: certbotnginx
     volumes:

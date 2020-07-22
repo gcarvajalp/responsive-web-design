@@ -7,7 +7,7 @@ fi
 
 domains=(services.sbis.cl)
 rsa_key_size=4096
-data_path="./config/data"
+data_path="./data/certbot"
 email="g.carvajal.pizarro@gmail.com" # Adding a valid address is strongly recommended
 staging=0 # Set to 1 if you're testing your setup to avoid hitting request limits
 
