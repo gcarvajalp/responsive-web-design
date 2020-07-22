@@ -5,7 +5,7 @@ services:
   servernginx:
     image: nginx:alpine
     container_name: servernginx
-    restart: unless-stopped
+    restart: unless-stopped #reiniciarse a menos que se detenga
     tty: true
     ports:
       - 80:80
@@ -17,6 +17,19 @@ services:
     volumes:
       - ./config/nginx:/etc/nginx/conf.d
       - ./public_html:/public_html
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+
+  certboxnginx:
+    image: certbot/certbot
+    container_name: certbotnginx
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - web-root:/public_html
+    depends_on:
+      - webserver
+    command: certonly --webroot --webroot-path=/public_html --email g.carvajal.pizarro@gmail.com --agree-tos --no-eff-email --staging -d webcrapp.ddns.net  -d www.webcrapp.ddns.net
 
 #Docker networks
 networks:
