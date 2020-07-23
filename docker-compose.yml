@@ -1,10 +1,7 @@
 version: "3"
-
 services:
-  #Nginx services
   nginx:
     image: nginx:1.15-alpine
-    container_name: nginx
     ports:
       - "80:80"
       - "443:443"
@@ -17,13 +14,7 @@ services:
 
   certbot:
     image: certbot/certbot
-    container_name: certbot
     volumes:
       - ./data/certbot/conf:/etc/letsencrypt
       - ./data/certbot/www:/var/www/certbot
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
-
-#Docker networks
-networks:
-  app-network:
-    driver: bridge
