@@ -3,33 +3,25 @@ version: "3"
 services:
   #Nginx services
   nginx:
-    image: nginx:alpine
-    container_name: servernginx
-    restart: unless-stopped #reiniciarse a menos que se detenga
-    tty: true
+    image: nginx:1.15-alpine
+    container_name: nginx
     ports:
-      - 80:80
-      - 443:443
-    environment:
-      TZ: "America/Santiago"
-    networks:
-      - app-network
+      - "80:80"
+      - "443:443"
     volumes:
-      - ./config/nginx:/etc/nginx/conf.d
+      - ./data/nginx:/etc/nginx/conf.d
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
       - ./public_html:/public_html
-      - ./config/data:/etc/letsencrypt
-      - ./config/logs:/var/lib/letsencrypt
+    command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
 
   certbot:
     image: certbot/certbot
-    container_name: certbotnginx
+    container_name: certbot
     volumes:
-      - ./config/data:/etc/letsencrypt
-      - ./config/logs:/var/lib/letsencrypt
-      - ./public_html:/public_html
-    depends_on:
-      - servernginx
-    command: certonly --webroot --webroot-path=/public_html --email g.carvajal.pizarro@gmail.com --agree-tos --no-eff-email --staging -d webcrapp.ddns.net
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
 #Docker networks
 networks:
