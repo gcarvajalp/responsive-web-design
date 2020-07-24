@@ -11,16 +11,15 @@ services:
       #- ./data/certbot/www:/var/www/certbot
       - ./public_html:/public_html
     #command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
-
-  noip:
-    image: linuxserver/duckdns
-    container_name: duckdns
-    environment:
-      - TZ=America/Chile/Santiago
-      - SUBDOMAINS=gabocarvajal
-      - TOKEN=d2e02c44-3791-49a9-9718-503646218f66
-      - LOG_FILE= false #optional
-    #certbot:
+  #noip:
+  #  image: linuxserver/duckdns
+  #  container_name: duckdns
+  #  environment:
+  #    - TZ=America/Chile/Santiago
+  #    - SUBDOMAINS=gabocarvajal
+  #    - TOKEN=d2e02c44-3791-49a9-9718-503646218f66
+  #    - LOG_FILE= false #optional
+  #certbot:
   #  image: certbot/certbot
   #  volumes:
   #    - ./data/certbot/conf:/etc/letsencrypt
