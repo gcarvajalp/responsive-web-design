@@ -1,36 +1,39 @@
 version: "3"
+
 services:
-  nginx:
-    image: nginx:1.19.1-alpine
-    container_name: nginx
-    restart: unless-stopped
+  nginx-proxy:
+    image: budry/jwilder-nginx-proxy-arm
+    restart: always
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ./data/nginx:/etc/nginx/conf.d
-      - ./public_html:/public_html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - certs:/etc/nginx/certs:ro
+      - confd:/etc/nginx/conf.d
+      - vhostd:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+    labels:
+      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
 
+  letsencrypt:
+    image: duch/letsencrypt-nginx-proxy-companion:stable
+    restart: always
+    volumes:
+      - certs:/etc/nginx/certs:rw
+      - confd:/etc/nginx/conf.d
+      - vhostd:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  nginx_fredrikson:
+    image: nginx
+    restart: always
+    expose:
+      - "80"
+    volumes:
+      - /home/pi/www:/usr/share/nginx/html:ro
     environment:
       - VIRTUAL_HOST=gabocarvajal.duckdns.org
       - LETSENCRYPT_HOST=gabocarvajal.duckdns.org
-      - LETSENCRYPT_EMAIL=g.carvajal.pizarro@gmail.com
-
-  noip:
-    image: linuxserver/duckdns
-    container_name: duckdns
-    environment:
-      - TZ=America/Chile/Santiago
-      - SUBDOMAINS=gabocarvajal
-      - TOKEN=d2e02c44-3791-49a9-9718-503646218f66
-      - LOG_FILE= false #optional
-
-  #letscrypt:
-  #image: linuxserver/letsencrypt:latest
-  #container_name: letscrypt
-  #restart: unless-stopped
-  #volumes:
-  #- certs:/etc/nginx/certs:rw
-  #- confd:/etc/nginx/confd
-  #- vhostd:/etc/nginx/vhostd.d
-  #- var/run/docker.sock:/var/run/docker.sock:ro
+      - LETSENCRYPT_EMAIL=gabocarvajal@duckdns.org
