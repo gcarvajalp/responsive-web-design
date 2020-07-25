@@ -36,7 +36,6 @@ services:
     volumes:
       - /home/pi/www:/usr/share/nginx/html:ro
       - ./public_html:/public_html
-
     environment:
       - VIRTUAL_HOST=gabocarvajal.duckdns.org
       - LETSENCRYPT_HOST=gabocarvajal.duckdns.org
