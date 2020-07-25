@@ -37,3 +37,8 @@ services:
       - VIRTUAL_HOST=gabocarvajal.duckdns.org
       - LETSENCRYPT_HOST=gabocarvajal.duckdns.org
       - LETSENCRYPT_EMAIL=gabocarvajal@duckdns.org
+volumes:
+  certs:
+  html:
+  vhostd:
+  confd:
