@@ -40,7 +40,8 @@ services:
 
 volumes:
   certs:
-  html: ./public_html
+  html:
+    - ./public_html
   vhostd:
   confd:
     - ./data/nginx:/etc/nginx/conf.d
