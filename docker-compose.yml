@@ -1,5 +1,4 @@
 version: "3"
-
 services:
   nginx-proxy:
     image: budry/jwilder-nginx-proxy-arm
