@@ -10,9 +10,12 @@ services:
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - certs:/etc/nginx/certs:ro
-      - confd:/etc/nginx/conf.d
+      #- confd:/etc/nginx/conf.d
       - vhostd:/etc/nginx/vhost.d
-      - html:/usr/share/nginx/html
+      #- html:/usr/share/nginx/html
+      - ./data/nginx:/etc/nginx/conf.d
+      - ./public_html:/public_html
+
     labels:
       - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
 
@@ -21,10 +24,12 @@ services:
     restart: always
     volumes:
       - certs:/etc/nginx/certs:rw
-      - confd:/etc/nginx/conf.d
+      #- confd:/etc/nginx/conf.d
       - vhostd:/etc/nginx/vhost.d
-      - html:/usr/share/nginx/html
+      #- html:/usr/share/nginx/html
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./data/nginx:/etc/nginx/conf.d
+      - ./public_html:/public_html
 
   nginx_fredrikson:
     image: nginx
