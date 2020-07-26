@@ -11,7 +11,7 @@ services:
       - certs:/etc/nginx/certs:ro
       - confd:/etc/nginx/conf.d
       - vhostd:/etc/nginx/vhost.d
-      - ./public_html:/usr/share/nginx/html
+      - html:/usr/share/nginx/html
     labels:
       - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
 
@@ -22,7 +22,7 @@ services:
       - certs:/etc/nginx/certs:rw
       - confd:/etc/nginx/conf.d
       - vhostd:/etc/nginx/vhost.d
-      - ./public_html:/usr/share/nginx/html
+      - html:/usr/share/nginx/html
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
   nginx_fredrikson:
@@ -33,9 +33,9 @@ services:
     volumes:
       - ./public_html:/usr/share/nginx/html:ro
     environment:
-      - VIRTUAL_HOST=gabrielantonio.duckdns.org
-      - LETSENCRYPT_HOST=gabrielantonio.duckdns.org
-      - LETSENCRYPT_EMAIL=g.carvajal.pizarro@gmail.com
+      - VIRTUAL_HOST=${VIRTUAL_HOST}
+      - LETSENCRYPT_HOST=${LETSENCRYPT_HOST}
+      - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
 
 volumes:
   certs:
